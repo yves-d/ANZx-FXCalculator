@@ -1,0 +1,52 @@
+[
+  {
+    "Base": "AUD",
+    "Term": "USD",
+    "Rate": 0.8371
+  },
+  {
+    "Base": "CAD",
+    "Term": "USD",
+    "Rate": 0.8711
+  },
+  {
+    "Base": "USD",
+    "Term": "CNY",
+    "Rate": 6.1715
+  },
+  {
+    "Base": "EUR",
+    "Term": "USD",
+    "Rate": 1.2315
+  },
+  {
+    "Base": "GBP",
+    "Term": "USD",
+    "Rate": 1.5683
+  },
+  {
+    "Base": "NZD",
+    "Term": "USD",
+    "Rate": 0.7750
+  },
+  {
+    "Base": "USD",
+    "Term": "JPY",
+    "Rate": 119.95
+  },
+  {
+    "Base": "EUR",
+    "Term": "CZK",
+    "Rate": 27.6028
+  },
+  {
+    "Base": "EUR",
+    "Term": "DKK",
+    "Rate": 7.4405
+  },
+  {
+    "Base": "EUR",
+    "Term": "NOK",
+    "Rate": 8.6651
+  }
+]
