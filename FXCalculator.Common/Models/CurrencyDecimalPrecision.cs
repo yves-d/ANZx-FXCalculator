@@ -3,6 +3,6 @@
     public class CurrencyDecimalPrecision
     {
         public string Currency { get; init; }
-        public int Precision { get; init; }
+        public int DecimalPlaces { get; init; }
     }
 }

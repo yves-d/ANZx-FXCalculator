@@ -1,46 +1,46 @@
 [
   {
     "Currency": "AUD",
-    "Precision": 2
+    "DecimalPlaces": 2
   },
   {
     "Currency": "CAD",
-    "Precision": 2
+    "DecimalPlaces": 2
   },
   {
     "Currency": "CNY",
-    "Precision": 2
+    "DecimalPlaces": 2
   },
   {
     "Currency": "CZK",
-    "Precision": 2
+    "DecimalPlaces": 2
   },
   {
     "Currency": "DKK",
-    "Precision": 2
+    "DecimalPlaces": 2
   },
   {
     "Currency": "EUR",
-    "Precision": 2
+    "DecimalPlaces": 2
   },
   {
     "Currency": "GBP",
-    "Precision": 2
+    "DecimalPlaces": 2
   },
   {
     "Currency": "JPY",
-    "Precision": 0
+    "DecimalPlaces": 0
   },
   {
     "Currency": "NOK",
-    "Precision": 2
+    "DecimalPlaces": 2
   },
   {
     "Currency": "NZD",
-    "Precision": 2
+    "DecimalPlaces": 2
   },
   {
     "Currency": "USD",
-    "Precision": 2
+    "DecimalPlaces": 2
   }
 ]

@@ -60,7 +60,8 @@ ANZx - Programming Exercise – FX Calculator
 12. Created repository class 'CurrencyRepository' to inherit 'ICurrencyRepository', and implemented the methods with default responses that throw 'NotImplementedException' (temproary).
 13. Added sample data in json files to the 'FXCalculator.Data' project.
 14. Start populating CurrencyRepository.
-
+15. Decided to store the data as json files to be read at startup.
+16. Took the suggestion of using the symmetry of the data in the table to cut down on data entry. Have to account for this in code when loading reverse pairs.
 13. 
 14. 
 15. Tidied up the unit tests.

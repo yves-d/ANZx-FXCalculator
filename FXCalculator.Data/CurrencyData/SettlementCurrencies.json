@@ -1,0 +1,419 @@
+[
+  // AUD
+  {
+    "Base": "AUD",
+    "Term": "AUD",
+    "SettlementMethod": "OneToOne",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "AUD",
+    "Term": "CAD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "AUD",
+    "Term": "CNY",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "AUD",
+    "Term": "CZK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "AUD",
+    "Term": "DKK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "AUD",
+    "Term": "EUR",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "AUD",
+    "Term": "GBP",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "AUD",
+    "Term": "JPY",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "AUD",
+    "Term": "NOK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "AUD",
+    "Term": "NZD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "AUD",
+    "Term": "USD",
+    "SettlementMethod": "Direct",
+    "SettlementCurrency": null
+  },
+
+  // CAD
+  {
+    "Base": "CAD",
+    "Term": "CAD",
+    "SettlementMethod": "OneToOne",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "CAD",
+    "Term": "CNY",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CAD",
+    "Term": "CZK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CAD",
+    "Term": "DKK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CAD",
+    "Term": "EUR",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CAD",
+    "Term": "GBP",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CAD",
+    "Term": "JPY",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CAD",
+    "Term": "NOK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CAD",
+    "Term": "NZD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CAD",
+    "Term": "USD",
+    "SettlementMethod": "Direct",
+    "SettlementCurrency": null
+  },
+
+  // CNY
+  {
+    "Base": "CNY",
+    "Term": "CNY",
+    "SettlementMethod": "OneToOne",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "CNY",
+    "Term": "CZK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CNY",
+    "Term": "DKK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CNY",
+    "Term": "EUR",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CNY",
+    "Term": "GBP",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CNY",
+    "Term": "JPY",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CNY",
+    "Term": "NOK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CNY",
+    "Term": "NZD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CNY",
+    "Term": "USD",
+    "SettlementMethod": "Direct",
+    "SettlementCurrency": null
+  },
+
+  // CZK
+  {
+    "Base": "CZK",
+    "Term": "CZK",
+    "SettlementMethod": "OneToOne",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "CZK",
+    "Term": "DKK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "EUR"
+  },
+  {
+    "Base": "CZK",
+    "Term": "EUR",
+    "SettlementMethod": "Inverted",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "CZK",
+    "Term": "GBP",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CZK",
+    "Term": "JPY",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CZK",
+    "Term": "NOK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "EUR"
+  },
+  {
+    "Base": "CZK",
+    "Term": "NZD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "CZK",
+    "Term": "USD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "EUR"
+  },
+
+  // DKK
+  {
+    "Base": "DKK",
+    "Term": "DKK",
+    "SettlementMethod": "OneToOne",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "DKK",
+    "Term": "EUR",
+    "SettlementMethod": "Inverted",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "DKK",
+    "Term": "GBP",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "DKK",
+    "Term": "JPY",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "DKK",
+    "Term": "NOK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "EUR"
+  },
+  {
+    "Base": "DKK",
+    "Term": "NZD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "DKK",
+    "Term": "USD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "EUR"
+  },
+
+  // EUR
+  {
+    "Base": "EUR",
+    "Term": "EUR",
+    "SettlementMethod": "OneToOne",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "EUR",
+    "Term": "GBP",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "EUR",
+    "Term": "JPY",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "EUR",
+    "Term": "NOK",
+    "SettlementMethod": "Direct",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "EUR",
+    "Term": "NZD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "EUR",
+    "Term": "USD",
+    "SettlementMethod": "Direct",
+    "SettlementCurrency": null
+  },
+
+  // GBP
+  {
+    "Base": "GBP",
+    "Term": "GBP",
+    "SettlementMethod": "OneToOne",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "GBP",
+    "Term": "JPY",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "GBP",
+    "Term": "NOK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "GBP",
+    "Term": "NZD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "GBP",
+    "Term": "USD",
+    "SettlementMethod": "Direct",
+    "SettlementCurrency": null
+  },
+
+  // JPY
+  {
+    "Base": "JPY",
+    "Term": "JPY",
+    "SettlementMethod": "OneToOne",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "JPY",
+    "Term": "NOK",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "JPY",
+    "Term": "NZD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "JPY",
+    "Term": "USD",
+    "SettlementMethod": "Inverted",
+    "SettlementCurrency": null
+  },
+
+  // NOK
+  {
+    "Base": "NOK",
+    "Term": "NOK",
+    "SettlementMethod": "OneToOne",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "NOK",
+    "Term": "NZD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "USD"
+  },
+  {
+    "Base": "NOK",
+    "Term": "USD",
+    "SettlementMethod": "Cross",
+    "SettlementCurrency": "EUR"
+  },
+
+  // NZD
+  {
+    "Base": "NZD",
+    "Term": "NZD",
+    "SettlementMethod": "OneToOne",
+    "SettlementCurrency": null
+  },
+  {
+    "Base": "NZD",
+    "Term": "USD",
+    "SettlementMethod": "Direct",
+    "SettlementCurrency": null
+  },
+
+  // USD
+  {
+    "Base": "USD",
+    "Term": "USD",
+    "SettlementMethod": "OneToOne",
+    "SettlementCurrency": null
+  }
+]
