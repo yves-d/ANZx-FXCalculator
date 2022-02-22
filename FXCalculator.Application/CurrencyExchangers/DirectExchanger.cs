@@ -6,7 +6,7 @@ namespace FXCalculator.Application.CurrencyExchangers
 {
     public class DirectExchanger : IExchangeCurrency
     {
-        ICurrencyRepository _currencyRepository;
+        protected readonly ICurrencyRepository _currencyRepository;
 
         public DirectExchanger(ICurrencyRepository currencyRepository)
         {
@@ -18,13 +18,13 @@ namespace FXCalculator.Application.CurrencyExchangers
             throw new NotImplementedException();
         }
 
-        public ExchangeDaemon GetExchangeDaemon(CurrencySettlementMethod currencySettlementMethod)
+        public ExchangeInstrument GetExchangeInstrument(CurrencySettlementMethod currencySettlementMethod)
         {
-            var exchangeRate = _currencyRepository.GetCurrencyPairExchangeRate(currencySettlementMethod.Base, currencySettlementMethod.Term);
+            var currencyPair = _currencyRepository.GetCurrencyPairExchangeRate(currencySettlementMethod.Base, currencySettlementMethod.Term);
             var currencyPrecision = _currencyRepository.GetCurrencyDecimalPrecision(currencySettlementMethod.Term);
-            return new ExchangeDaemon()
+            return new ExchangeInstrument()
             {
-                Rate = exchangeRate.Rate,
+                Rate = currencyPair.Rate,
                 Precision = currencyPrecision.DecimalPlaces
             };
         }

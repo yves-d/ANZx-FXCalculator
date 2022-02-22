@@ -1,6 +1,6 @@
 ﻿namespace FXCalculator.Application.CurrencyExchangers
 {
-    public class ExchangeDaemon
+    public class ExchangeInstrument
     {
         public decimal Rate { get; init; }
         public int Precision { get; set; }

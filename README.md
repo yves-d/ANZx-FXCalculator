@@ -63,7 +63,8 @@ ANZx - Programming Exercise – FX Calculator
 15. Decided to store the data as json files to be read at startup.
 16. Took the suggestion of using the symmetry of the data in the table to cut down on data entry. Have to account for this in code when loading reverse pairs.
 13. 
-14. 
+14. First run of the happy path unit tests for direct pairs picked up that the cross table entry for CNY/USD (direct) - USD/CNY (inverted) aren't playing nice. 
+15. Googled the current price of US dollars to Chinese Yuan, and noticed it's in the region of ~6.33, so the direct feed data is in the range for a USD/CNY pair, therefore the table guidance is wrong for this pair. CNY/USD should be inverted, and USD/CNY should be direct.
 15. Tidied up the unit tests.
 16. Created the Dockerfile, as an option for running the solution.
 17. Filled out the rest of the README.md

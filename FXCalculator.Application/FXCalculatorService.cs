@@ -17,13 +17,13 @@ namespace FXCalculator.Application
 
         public FXCalculationResult CalculateExchangeAmount(string baseCurrency, string termsCurrency, decimal amount)
         {
-            var settlementMethod = _currencyRepository.GetCurrencySettlementMethod(baseCurrency, termsCurrency);
+            var currencySettlementMethod = _currencyRepository.GetCurrencySettlementMethod(baseCurrency, termsCurrency);
 
-            var currencyExchanger = _currencyExchangeFactory.GetCurrencyExchanger(settlementMethod.SettlementMethod);
+            var currencyExchanger = _currencyExchangeFactory.GetCurrencyExchanger(currencySettlementMethod.SettlementMethod);
 
-            var exchangeDaemon = currencyExchanger.GetExchangeDaemon(settlementMethod);
+            var exchangeInstrument = currencyExchanger.GetExchangeInstrument(currencySettlementMethod);
 
-            var exchangedAmount = exchangeDaemon.Exchange(amount);
+            var exchangedAmount = exchangeInstrument.Exchange(amount);
 
             return new FXCalculationResult()
             {
@@ -32,8 +32,6 @@ namespace FXCalculator.Application
                 ExchangedAmount = exchangedAmount,
                 Outcome = FXCalculationOutcomeEnum.SUCCESS
             };
-
-            throw new NotImplementedException();
         }
     }
 }

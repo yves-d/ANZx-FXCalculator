@@ -178,10 +178,17 @@
     "SettlementMethod": "Cross",
     "SettlementCurrency": "USD"
   },
+  // THIS SUPPLIED PAIRING IS INCORRECT, AND DOESN'T MATCH THE FEED DATA PROVIDED.
+  //{
+  //  "Base": "CNY",
+  //  "Term": "USD",
+  //  "SettlementMethod": "Direct",
+  //  "SettlementCurrency": null
+  //},
   {
     "Base": "CNY",
     "Term": "USD",
-    "SettlementMethod": "Direct",
+    "SettlementMethod": "Inverted",
     "SettlementCurrency": null
   },
 

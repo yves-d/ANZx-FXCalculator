@@ -7,6 +7,6 @@ namespace FXCalculator.Application.Interfaces
     {
         decimal Exchange(decimal amount);
 
-        ExchangeDaemon GetExchangeDaemon(CurrencySettlementMethod currencySettlementMethod);
+        ExchangeInstrument GetExchangeInstrument(CurrencySettlementMethod currencySettlementMethod);
     }
 }

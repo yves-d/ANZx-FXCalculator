@@ -18,11 +18,11 @@ namespace FXCalculator.Application.CurrencyExchangers
             throw new NotImplementedException();
         }
 
-        public ExchangeDaemon GetExchangeDaemon(CurrencySettlementMethod currencySettlementMethod)
+        public ExchangeInstrument GetExchangeInstrument(CurrencySettlementMethod currencySettlementMethod)
         {
             var exchangeRate = _currencyRepository.GetCurrencyPairExchangeRate(currencySettlementMethod.Term, currencySettlementMethod.Base);
             var currencyPrecision = _currencyRepository.GetCurrencyDecimalPrecision(currencySettlementMethod.Base);
-            return new ExchangeDaemon()
+            return new ExchangeInstrument()
             {
                 Rate = 1 / exchangeRate.Rate,
                 Precision = currencyPrecision.DecimalPlaces

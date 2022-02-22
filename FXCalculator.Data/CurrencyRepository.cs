@@ -36,12 +36,12 @@ namespace FXCalculator.Data
                 throw new SettlementMethodNotFoundException($"Could not find settlement method for base '{baseCurrency}' and term '{termCurrency}'");
 
             // swap the base and term around, to represent the complete table
-            if (storedMethod.Base == termCurrency)
+            if (storedMethod.Base == termCurrency && storedMethod.SettlementMethod != SettlementMethodEnum.OneToOne)
             {
                 return new CurrencySettlementMethod()
                 {
-                    Base = termCurrency,
-                    Term = baseCurrency,
+                    Base = baseCurrency,
+                    Term = termCurrency,
                     SettlementCurrency = storedMethod.SettlementCurrency,
                     SettlementMethod = FlipDirectIndirectConversion(storedMethod.SettlementMethod)
                 };

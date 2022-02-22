@@ -17,14 +17,6 @@ namespace FXCalculator.Application
             LoadCurrencyExchangeServices();
         }
 
-        //public IExchangeCurrency GetCurrencyExchanger(string baseCurrency, string termsCurrency, CurrencySettlementMethod currencySettlementMethod)
-        //{
-        //    if (_currencyExchangers.ContainsKey(currencySettlementMethod.SettlementMethod))
-        //        return _currencyExchangers[currencySettlementMethod.SettlementMethod]();
-
-        //    throw new CurrencyExchangerNotImplementedException($"Crypto Service not implemented - {currencySettlementMethod.SettlementMethod}");
-        //}
-
         public IExchangeCurrency GetCurrencyExchanger(SettlementMethodEnum settlementMethodEnum)
         {
             if (_currencyExchangers.ContainsKey(settlementMethodEnum))
@@ -40,6 +32,7 @@ namespace FXCalculator.Application
             _currencyExchangers.Add(SettlementMethodEnum.Inverted, () => (IExchangeCurrency)_serviceProvider.GetService(typeof(InvertedExchanger)));
             _currencyExchangers.Add(SettlementMethodEnum.OneToOne, () => (IExchangeCurrency)_serviceProvider.GetService(typeof(OneToOneExchanger)));
             _currencyExchangers.Add(SettlementMethodEnum.Cross, () => (IExchangeCurrency)_serviceProvider.GetService(typeof(CrossExchanger)));
+            
         }
     }
 }
