@@ -26,28 +26,11 @@ namespace FXCalculator.Data
 
         public CurrencySettlementMethod GetCurrencySettlementMethod(string baseCurrency, string termCurrency)
         {
-            var storedMethod = _currencySettlementMethods.SingleOrDefault(method =>
+            return _currencySettlementMethods.SingleOrDefault(method =>
                 (method.Base == baseCurrency && method.Term == termCurrency)
                 ||
                 (method.Base == termCurrency && method.Term == baseCurrency)
             );
-
-            if (storedMethod == null)
-                throw new SettlementMethodNotFoundException($"Could not find settlement method for base '{baseCurrency}' and term '{termCurrency}'");
-
-            // swap the base and term around, to represent the complete table
-            if (storedMethod.Base == termCurrency && storedMethod.SettlementMethod != SettlementMethodEnum.OneToOne)
-            {
-                return new CurrencySettlementMethod()
-                {
-                    Base = baseCurrency,
-                    Term = termCurrency,
-                    SettlementCurrency = storedMethod.SettlementCurrency,
-                    SettlementMethod = FlipDirectIndirectConversion(storedMethod.SettlementMethod)
-                };
-            }
-            
-            return storedMethod;
         }
 
         public CurrencyPairExchangeRate GetCurrencyPairExchangeRate(string baseCurrency, string termCurrency)
@@ -58,16 +41,6 @@ namespace FXCalculator.Data
         public CurrencyDecimalPrecision GetCurrencyDecimalPrecision(string currency)
         {
             return _currencyDecimalPrecisions.SingleOrDefault(currencyPrecision => currencyPrecision.Currency == currency);
-        }
-
-        private SettlementMethodEnum FlipDirectIndirectConversion(SettlementMethodEnum savedSettlementMethod)
-        {
-            if (savedSettlementMethod == SettlementMethodEnum.Direct)
-                return SettlementMethodEnum.Inverted;
-            else if (savedSettlementMethod == SettlementMethodEnum.Inverted)
-                return SettlementMethodEnum.Direct;
-            else
-                return savedSettlementMethod;
         }
 
         #region Datastore initialisation

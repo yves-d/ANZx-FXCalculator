@@ -1,23 +1,22 @@
 ﻿using FXCalculator.Application.Interfaces;
 using FXCalculator.Application.Models;
-using FXCalculator.Data.Interfaces;
 
 namespace FXCalculator.Application
 {
     public class FXCalculatorService : IFXCalculatorService
     {
-        ICurrencyRepository _currencyRepository;
-        ICurrencyExchangeFactory _currencyExchangeFactory;
+        private readonly ICurrencyLoader _currencyLoader;
+        private readonly ICurrencyExchangeFactory _currencyExchangeFactory;
 
-        public FXCalculatorService(ICurrencyRepository currencyRepository, ICurrencyExchangeFactory currencyExchangeFactory)
+        public FXCalculatorService(ICurrencyLoader currencyLoader, ICurrencyExchangeFactory currencyExchangeFactory)
         {
-            _currencyRepository = currencyRepository;
+            _currencyLoader = currencyLoader;
             _currencyExchangeFactory = currencyExchangeFactory; 
         }
 
         public FXCalculationResult CalculateExchangeAmount(string baseCurrency, string termsCurrency, decimal amount)
         {
-            var currencySettlementMethod = _currencyRepository.GetCurrencySettlementMethod(baseCurrency, termsCurrency);
+            var currencySettlementMethod = _currencyLoader.GetCurrencySettlementMethod(baseCurrency, termsCurrency);
 
             var currencyExchanger = _currencyExchangeFactory.GetCurrencyExchanger(currencySettlementMethod.SettlementMethod);
 

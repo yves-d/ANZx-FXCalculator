@@ -1,16 +1,15 @@
 ﻿using FXCalculator.Application.Interfaces;
 using FXCalculator.Common.Models;
-using FXCalculator.Data.Interfaces;
 
 namespace FXCalculator.Application.CurrencyExchangers
 {
     public class OneToOneExchanger : IExchangeCurrency
     {
-        ICurrencyRepository _currencyRepository;
+        private readonly ICurrencyLoader _currencyLoader;
 
-        public OneToOneExchanger(ICurrencyRepository currencyRepository)
+        public OneToOneExchanger(ICurrencyLoader currencyLoader)
         {
-            _currencyRepository = currencyRepository;
+            _currencyLoader = currencyLoader;
         }
 
         public decimal Exchange(decimal amount)
@@ -20,7 +19,7 @@ namespace FXCalculator.Application.CurrencyExchangers
 
         public ExchangeInstrument GetExchangeInstrument(CurrencySettlementMethod currencySettlementMethod)
         {
-            var currencyPrecision = _currencyRepository.GetCurrencyDecimalPrecision(currencySettlementMethod.Base);
+            var currencyPrecision = _currencyLoader.GetCurrencyDecimalPrecision(currencySettlementMethod.Base);
             return new ExchangeInstrument()
             {
                 Rate = 1.00m,

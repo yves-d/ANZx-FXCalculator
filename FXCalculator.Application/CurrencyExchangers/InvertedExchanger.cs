@@ -6,11 +6,11 @@ namespace FXCalculator.Application.CurrencyExchangers
 {
     public class InvertedExchanger : IExchangeCurrency
     {
-        ICurrencyRepository _currencyRepository;
+        private readonly ICurrencyLoader _currencyLoader;
 
-        public InvertedExchanger(ICurrencyRepository currencyRepository)
+        public InvertedExchanger(ICurrencyLoader currencyLoader)
         {
-            _currencyRepository = currencyRepository;
+            _currencyLoader = currencyLoader;
         }
 
         public decimal Exchange(decimal amount)
@@ -20,8 +20,8 @@ namespace FXCalculator.Application.CurrencyExchangers
 
         public ExchangeInstrument GetExchangeInstrument(CurrencySettlementMethod currencySettlementMethod)
         {
-            var exchangeRate = _currencyRepository.GetCurrencyPairExchangeRate(currencySettlementMethod.Term, currencySettlementMethod.Base);
-            var currencyPrecision = _currencyRepository.GetCurrencyDecimalPrecision(currencySettlementMethod.Base);
+            var exchangeRate = _currencyLoader.GetCurrencyPairExchangeRate(currencySettlementMethod.Term, currencySettlementMethod.Base);
+            var currencyPrecision = _currencyLoader.GetCurrencyDecimalPrecision(currencySettlementMethod.Base);
             return new ExchangeInstrument()
             {
                 Rate = 1 / exchangeRate.Rate,

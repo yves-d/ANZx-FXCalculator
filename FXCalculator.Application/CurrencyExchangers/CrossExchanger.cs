@@ -1,17 +1,16 @@
 ﻿using FXCalculator.Application.Exceptions;
 using FXCalculator.Application.Interfaces;
 using FXCalculator.Common.Models;
-using FXCalculator.Data.Interfaces;
 
 namespace FXCalculator.Application.CurrencyExchangers
 {
     public class CrossExchanger : IExchangeCurrency
     {
-        protected readonly ICurrencyRepository _currencyRepository;
+        private readonly ICurrencyLoader _currencyLoader;
 
-        public CrossExchanger(ICurrencyRepository currencyRepository)
+        public CrossExchanger(ICurrencyLoader currencyLoader)
         {
-            _currencyRepository = currencyRepository;
+            _currencyLoader = currencyLoader;
         }
 
         public decimal Exchange(decimal amount)
@@ -23,11 +22,11 @@ namespace FXCalculator.Application.CurrencyExchangers
         {
             bool stillArrivingBaseAtCrossCurrency = true;
             decimal rateFromBaseToCross = 1;
-            CurrencySettlementMethod nextCurrencySettlement = _currencyRepository.GetCurrencySettlementMethod(currencySettlementMethod.Base, currencySettlementMethod.SettlementCurrency);
+            CurrencySettlementMethod nextCurrencySettlement = _currencyLoader.GetCurrencySettlementMethod(currencySettlementMethod.Base, currencySettlementMethod.SettlementCurrency);
             while (stillArrivingBaseAtCrossCurrency)
             {
                 if (nextCurrencySettlement.SettlementMethod == SettlementMethodEnum.Cross)
-                    nextCurrencySettlement = _currencyRepository.GetCurrencySettlementMethod(nextCurrencySettlement.SettlementCurrency, currencySettlementMethod.Term);
+                    nextCurrencySettlement = _currencyLoader.GetCurrencySettlementMethod(nextCurrencySettlement.SettlementCurrency, currencySettlementMethod.Term);
 
                 if (nextCurrencySettlement.SettlementMethod != SettlementMethodEnum.Cross)
                 {
@@ -38,11 +37,11 @@ namespace FXCalculator.Application.CurrencyExchangers
                     if (currencySettlementMethod.Term == nextCurrencySettlement.Term)
                         stillArrivingBaseAtCrossCurrency = false;
                     else
-                        nextCurrencySettlement = _currencyRepository.GetCurrencySettlementMethod(nextCurrencySettlement.Term, currencySettlementMethod.Term);
+                        nextCurrencySettlement = _currencyLoader.GetCurrencySettlementMethod(nextCurrencySettlement.Term, currencySettlementMethod.Term);
                 }
             }
 
-            var currencyPrecision = _currencyRepository.GetCurrencyDecimalPrecision(currencySettlementMethod.Term);
+            var currencyPrecision = _currencyLoader.GetCurrencyDecimalPrecision(currencySettlementMethod.Term);
             return new ExchangeInstrument()
             {
                 Rate = rateFromBaseToCross,
