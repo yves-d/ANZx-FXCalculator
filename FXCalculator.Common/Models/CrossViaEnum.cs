@@ -1,9 +1,9 @@
 ﻿namespace FXCalculator.Common.Models
 {
-    public enum SettlementMethodEnum
+    public enum CrossViaEnum
     {
-        None,
         Direct,
+        Inverted,
         OneToOne,
         Cross
     }

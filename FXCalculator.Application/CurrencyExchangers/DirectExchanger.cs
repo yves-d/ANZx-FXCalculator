@@ -12,11 +12,6 @@ namespace FXCalculator.Application.CurrencyExchangers
             _currencyLoader = currencyLoader;
         }
 
-        public decimal Exchange(decimal amount)
-        {
-            throw new NotImplementedException();
-        }
-
         public ExchangeInstrument GetExchangeInstrument(CurrencySettlementMethod currencySettlementMethod)
         {
             var currencyPair = _currencyLoader.GetCurrencyPairExchangeRate(currencySettlementMethod.Base, currencySettlementMethod.Term);

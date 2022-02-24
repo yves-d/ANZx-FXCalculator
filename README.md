@@ -9,24 +9,30 @@ ANZx - Programming Exercise – FX Calculator
 - Initial thoughts are to represent it in a json file, and load it up at application startup.
 - This should allow for future extensibility of reading from a datastore or external API.
 
-2. Are all the settlement currency mappings in the provided table complete? Are there any gaps between currencies?
+2. Looks like the types of currency settlement available on the cross table are distinct 'methods' of settling between currencies.
+- each would require their own distinct way of settling an exchange.
+- Potential there for a factory class.
+
+3. Are all the settlement currency mappings in the provided table complete? Are there any gaps between currencies? Are they mapped correctly?
 - Without actually eyeballing each one, I guess we'll find out at the unit test stage.
+
+4. Do all the currency pairs in the table have corresponding pairs in the rates list?
 - Looks like there is an intended error output which would cover this scenario, which we can build unit tests for.
 
-3. How to store the table of settlement currency mappings?
+5. How to store the table of settlement currency mappings?
 - Initial thoughts are to go with a JSON file, and load at application start-up.
 - At first glance, each pair and their settlement currency could be represented by a distinct json object in the file. 
 - This data mapping could potentially be checked first, before any other lookup is required.
 
-4. How to store the decimal place information?
+6. How to store the decimal place information?
 - This could certainly go into a json file.
 - Consider - how likely is this to change? Perhaps its something that can be hardcoded.
 - Seeing as we're already likely to go with a JSON file store, may as well keep to that pattern for this as well. Think of it as a stand-in for a database.
 
-5. Do we need to load up the JSON data store objects for unit tests, or do we mock/stub that?
+7. Do we need to load up the JSON data store objects for unit tests, or do we mock/stub that?
 - Seeing as it would effectively be in-memory, may as well load it up for unit tests as well.
 
-6. In terms of validation and exception handling... 
+8. In terms of validation and exception handling... 
     
     a. What happens when incorrect input is entered?
     - As the application (business logic) layer itself doesn't need to worry about this, I would have this occur closer to the console (presentation) layer. As it will have to parse the typed user input, it will need to perform basic hygiene with regards to formatting and type casting.
@@ -62,9 +68,15 @@ ANZx - Programming Exercise – FX Calculator
 14. Start populating CurrencyRepository.
 15. Decided to store the data as json files to be read at startup.
 16. Took the suggestion of using the symmetry of the data in the table to cut down on data entry. Have to account for this in code when loading reverse pairs.
-13. 
+17. Created 'CurrencyLoader' class to sit between the CurrencyRepository and the FXCalculatorService. Intention here is to handle any manipulation of pairs before serving it up to the 'FXCurrencyService'.
+18. Built a factory to produce currency exchangers for direct, indirect, one-to-one, and cross settlement methods.
 14. First run of the happy path unit tests for direct pairs picked up that the cross table entry for CNY/USD (direct) - USD/CNY (inverted) aren't playing nice. 
 15. Googled the current price of US dollars to Chinese Yuan, and noticed it's in the region of ~6.33, so the direct feed data is in the range for a USD/CNY pair, therefore the table guidance is wrong for this pair. CNY/USD should be inverted, and USD/CNY should be direct.
+    - Decision to be made: do we fix the table, or account for 'errors' in the table in code?
+    - Guidance in the instructions said to use the table provided. Assumption is this is a deliberate error.
+    - Will go with keeping the table as is, and make the direct/inverted rate lookup more robust.
+16. We can handle the issue of incorrect table guidance by doing away with the distinction between direct and inverted, as far as the service, factory, and currency exchangers are concerned. In effect, the parameter for direct/inverted as seen in the table, is now meaningless. Instead, we can work out the correct rate when we ask for the exchange pair from the 'CurrencyLoader'.
+17. The CurrencyLoader can work out if a pair it has been provided is inverted or not (when viewed against the currency pair rate table), and switch up the rate (1/rate) on the fly.
 15. Tidied up the unit tests.
 16. Created the Dockerfile, as an option for running the solution.
 17. Filled out the rest of the README.md

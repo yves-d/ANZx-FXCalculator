@@ -29,10 +29,8 @@ namespace FXCalculator.Application
         {
             _currencyExchangers = new Dictionary<SettlementMethodEnum, Func<IExchangeCurrency>>();
             _currencyExchangers.Add(SettlementMethodEnum.Direct, () => (IExchangeCurrency)_serviceProvider.GetService(typeof(DirectExchanger)));
-            _currencyExchangers.Add(SettlementMethodEnum.Inverted, () => (IExchangeCurrency)_serviceProvider.GetService(typeof(InvertedExchanger)));
             _currencyExchangers.Add(SettlementMethodEnum.OneToOne, () => (IExchangeCurrency)_serviceProvider.GetService(typeof(OneToOneExchanger)));
-            _currencyExchangers.Add(SettlementMethodEnum.Cross, () => (IExchangeCurrency)_serviceProvider.GetService(typeof(CrossExchanger)));
-            
+            _currencyExchangers.Add(SettlementMethodEnum.Cross, () => (IExchangeCurrency)_serviceProvider.GetService(typeof(CrossExchanger)));            
         }
     }
 }

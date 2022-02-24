@@ -5,8 +5,6 @@ namespace FXCalculator.Application.Interfaces
 {
     public interface IExchangeCurrency
     {
-        decimal Exchange(decimal amount);
-
         ExchangeInstrument GetExchangeInstrument(CurrencySettlementMethod currencySettlementMethod);
     }
 }

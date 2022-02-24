@@ -3,67 +3,67 @@
   {
     "Base": "AUD",
     "Term": "AUD",
-    "SettlementMethod": "OneToOne",
+    "CrossVia": "OneToOne",
     "SettlementCurrency": null
   },
   {
     "Base": "AUD",
     "Term": "CAD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "AUD",
     "Term": "CNY",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "AUD",
     "Term": "CZK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "AUD",
     "Term": "DKK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "AUD",
     "Term": "EUR",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "AUD",
     "Term": "GBP",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "AUD",
     "Term": "JPY",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "AUD",
     "Term": "NOK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "AUD",
     "Term": "NZD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "AUD",
     "Term": "USD",
-    "SettlementMethod": "Direct",
+    "CrossVia": "Direct",
     "SettlementCurrency": null
   },
 
@@ -71,61 +71,61 @@
   {
     "Base": "CAD",
     "Term": "CAD",
-    "SettlementMethod": "OneToOne",
+    "CrossVia": "OneToOne",
     "SettlementCurrency": null
   },
   {
     "Base": "CAD",
     "Term": "CNY",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CAD",
     "Term": "CZK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CAD",
     "Term": "DKK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CAD",
     "Term": "EUR",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CAD",
     "Term": "GBP",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CAD",
     "Term": "JPY",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CAD",
     "Term": "NOK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CAD",
     "Term": "NZD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CAD",
     "Term": "USD",
-    "SettlementMethod": "Direct",
+    "CrossVia": "Direct",
     "SettlementCurrency": null
   },
 
@@ -133,62 +133,57 @@
   {
     "Base": "CNY",
     "Term": "CNY",
-    "SettlementMethod": "OneToOne",
+    "CrossVia": "OneToOne",
     "SettlementCurrency": null
   },
   {
     "Base": "CNY",
     "Term": "CZK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CNY",
     "Term": "DKK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CNY",
     "Term": "EUR",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CNY",
     "Term": "GBP",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CNY",
     "Term": "JPY",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CNY",
     "Term": "NOK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CNY",
     "Term": "NZD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
-  // THIS SUPPLIED PAIRING IS INCORRECT, AND DOESN'T MATCH THE FEED DATA PROVIDED.
-  //{
-  //  "Base": "CNY",
-  //  "Term": "USD",
-  //  "SettlementMethod": "Direct",
-  //  "SettlementCurrency": null
-  //},
+  // This supplied entry for CNY/USD is incorrect, and doesn't match the feed data provided.
+  // It should read "Indirect", if it were to match the corresponding entry in the list of rates.
   {
     "Base": "CNY",
     "Term": "USD",
-    "SettlementMethod": "Inverted",
+    "CrossVia": "Direct",
     "SettlementCurrency": null
   },
 
@@ -196,49 +191,49 @@
   {
     "Base": "CZK",
     "Term": "CZK",
-    "SettlementMethod": "OneToOne",
+    "CrossVia": "OneToOne",
     "SettlementCurrency": null
   },
   {
     "Base": "CZK",
     "Term": "DKK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "EUR"
   },
   {
     "Base": "CZK",
     "Term": "EUR",
-    "SettlementMethod": "Inverted",
+    "CrossVia": "Inverted",
     "SettlementCurrency": null
   },
   {
     "Base": "CZK",
     "Term": "GBP",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CZK",
     "Term": "JPY",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CZK",
     "Term": "NOK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "EUR"
   },
   {
     "Base": "CZK",
     "Term": "NZD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "CZK",
     "Term": "USD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "EUR"
   },
 
@@ -246,43 +241,43 @@
   {
     "Base": "DKK",
     "Term": "DKK",
-    "SettlementMethod": "OneToOne",
+    "CrossVia": "OneToOne",
     "SettlementCurrency": null
   },
   {
     "Base": "DKK",
     "Term": "EUR",
-    "SettlementMethod": "Inverted",
+    "CrossVia": "Inverted",
     "SettlementCurrency": null
   },
   {
     "Base": "DKK",
     "Term": "GBP",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "DKK",
     "Term": "JPY",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "DKK",
     "Term": "NOK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "EUR"
   },
   {
     "Base": "DKK",
     "Term": "NZD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "DKK",
     "Term": "USD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "EUR"
   },
 
@@ -290,37 +285,37 @@
   {
     "Base": "EUR",
     "Term": "EUR",
-    "SettlementMethod": "OneToOne",
+    "CrossVia": "OneToOne",
     "SettlementCurrency": null
   },
   {
     "Base": "EUR",
     "Term": "GBP",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "EUR",
     "Term": "JPY",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "EUR",
     "Term": "NOK",
-    "SettlementMethod": "Direct",
+    "CrossVia": "Direct",
     "SettlementCurrency": null
   },
   {
     "Base": "EUR",
     "Term": "NZD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "EUR",
     "Term": "USD",
-    "SettlementMethod": "Direct",
+    "CrossVia": "Direct",
     "SettlementCurrency": null
   },
 
@@ -328,31 +323,31 @@
   {
     "Base": "GBP",
     "Term": "GBP",
-    "SettlementMethod": "OneToOne",
+    "CrossVia": "OneToOne",
     "SettlementCurrency": null
   },
   {
     "Base": "GBP",
     "Term": "JPY",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "GBP",
     "Term": "NOK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "GBP",
     "Term": "NZD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "GBP",
     "Term": "USD",
-    "SettlementMethod": "Direct",
+    "CrossVia": "Direct",
     "SettlementCurrency": null
   },
 
@@ -360,25 +355,25 @@
   {
     "Base": "JPY",
     "Term": "JPY",
-    "SettlementMethod": "OneToOne",
+    "CrossVia": "OneToOne",
     "SettlementCurrency": null
   },
   {
     "Base": "JPY",
     "Term": "NOK",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "JPY",
     "Term": "NZD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "JPY",
     "Term": "USD",
-    "SettlementMethod": "Inverted",
+    "CrossVia": "Inverted",
     "SettlementCurrency": null
   },
 
@@ -386,19 +381,19 @@
   {
     "Base": "NOK",
     "Term": "NOK",
-    "SettlementMethod": "OneToOne",
+    "CrossVia": "OneToOne",
     "SettlementCurrency": null
   },
   {
     "Base": "NOK",
     "Term": "NZD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "USD"
   },
   {
     "Base": "NOK",
     "Term": "USD",
-    "SettlementMethod": "Cross",
+    "CrossVia": "Cross",
     "SettlementCurrency": "EUR"
   },
 
@@ -406,13 +401,13 @@
   {
     "Base": "NZD",
     "Term": "NZD",
-    "SettlementMethod": "OneToOne",
+    "CrossVia": "OneToOne",
     "SettlementCurrency": null
   },
   {
     "Base": "NZD",
     "Term": "USD",
-    "SettlementMethod": "Direct",
+    "CrossVia": "Direct",
     "SettlementCurrency": null
   },
 
@@ -420,7 +415,7 @@
   {
     "Base": "USD",
     "Term": "USD",
-    "SettlementMethod": "OneToOne",
+    "CrossVia": "OneToOne",
     "SettlementCurrency": null
   }
 ]

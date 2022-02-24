@@ -35,7 +35,11 @@ namespace FXCalculator.Data
 
         public CurrencyPairExchangeRate GetCurrencyPairExchangeRate(string baseCurrency, string termCurrency)
         {
-            return _currencyPairExchangeRates.SingleOrDefault(pair => pair.Base == baseCurrency && pair.Term == termCurrency);
+            return _currencyPairExchangeRates.SingleOrDefault(method =>
+                (method.Base == baseCurrency && method.Term == termCurrency)
+                ||
+                (method.Base == termCurrency && method.Term == baseCurrency)
+            );
         }
 
         public CurrencyDecimalPrecision GetCurrencyDecimalPrecision(string currency)

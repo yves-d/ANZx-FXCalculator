@@ -12,66 +12,23 @@ namespace FXCalculator.Application.Tests
     public class FXCalculatorServiceSubCutaneousTests
     {
         IFXCalculatorService _fxCalculatorService;
-
-        ICurrencyRepository _currencyRepository;
-        ICurrencyExchangeFactory _currencyExchangeFactory;
         IServiceProvider _serviceProvider;
 
+        // arrange
         public FXCalculatorServiceSubCutaneousTests()
         {
-            //_currencyRepository = new CurrencyRepository();
-            //_currencyExchangeFactory = new CurrencyExchangeFactory();
-            //_fxCalculatorService = new FXCalculatorService(_currencyRepository, _currencyExchangeFactory);
-
             //setup our DI
             _serviceProvider = new ServiceCollection()
-                .AddTransient<IFXCalculatorService, FXCalculatorService>()
+                .AddScoped<IFXCalculatorService, FXCalculatorService>()
+                .AddScoped<ICurrencyLoader, CurrencyLoader>()
                 .AddSingleton<ICurrencyRepository, CurrencyRepository>()
-                .AddTransient<ICurrencyExchangeFactory, CurrencyExchangeFactory>()
-                //.AddTransient<ServiceResolver>(serviceProvider => key =>
-                //{
-                //    switch (key)
-                //    {
-                //        case "A":
-                //            return serviceProvider.GetService<ServiceA>();
-                //        case "B":
-                //            return serviceProvider.GetService<ServiceB>();
-                //        case "C":
-                //            return serviceProvider.GetService<ServiceC>();
-                //        default:
-                //            throw new KeyNotFoundException(); // or maybe return null, up to you
-                //    }
-                //});
+                .AddScoped<ICurrencyExchangeFactory, CurrencyExchangeFactory>()
                 .AddScoped<DirectExchanger>()
-                .AddScoped<InvertedExchanger>()
                 .AddScoped<CrossExchanger>()
                 .AddScoped<OneToOneExchanger>()
                 .BuildServiceProvider();
 
             _fxCalculatorService = _serviceProvider.GetService<IFXCalculatorService>();
-        }
-
-        [Fact]
-        public void WHEN_Currency_Is_Not_Found_THEN_CalculateExchangeAmount_SHOULD_Return_CURRENCYNOTFOUND()
-        {
-            // arrange
-            
-            
-
-            // act
-
-
-            // assert
-        }
-
-        [Fact]
-        public void WHEN_Currency_Pair_Is_Not_Found_THEN_CalculateExchangeAmount_SHOULD_Return_PAIRNOTFOUND()
-        {
-            // arrange
-
-            // act
-
-            // assert
         }
 
         [Fact]
@@ -116,7 +73,7 @@ namespace FXCalculator.Application.Tests
         [InlineData("USD", "EUR", 100.00, 81.20)]
         [InlineData("USD", "GBP", 100.00, 63.76)]
         [InlineData("USD", "NZD", 100.00, 129.03)]
-        [InlineData("JPY", "USD", 100.00, 1.00)]
+        [InlineData("JPY", "USD", 100.00, 0.83)]
         [InlineData("CZK", "EUR", 100.00, 3.62)]
         [InlineData("DKK", "EUR", 100.00, 13.44)]
         [InlineData("NOK", "EUR", 100.00, 11.54)]
@@ -183,13 +140,16 @@ namespace FXCalculator.Application.Tests
         [Theory]
         [InlineData("AUD", "CAD", 100.00, 96.10)]
         [InlineData("AUD", "CNY", 100.00, 516.62)]
-        [InlineData("AUD", "CZK", 100.00, 2310.63)]
-        //[InlineData("AUD", "DKK", 100.00, 81.20)]
-        //[InlineData("AUD", "EUR", 100.00, 63.76)]
-        //[InlineData("AUD", "GPB", 100.00, 129.03)]
-        //[InlineData("AUD", "JPY", 100.00, 129.03)]
-        //[InlineData("AUD", "NOK", 100.00, 129.03)]
-        //[InlineData("AUD", "NZD", 100.00, 129.03)]
+        [InlineData("AUD", "CZK", 100.00, 1876.27)]
+        [InlineData("AUD", "DKK", 100.00, 505.76)]
+        [InlineData("AUD", "EUR", 100.00, 67.97)]
+        [InlineData("AUD", "GBP", 100.00, 53.38)]
+        [InlineData("AUD", "JPY", 100.00, 10041.00)]
+        [InlineData("AUD", "NOK", 100.00, 589.00)]
+        [InlineData("AUD", "NZD", 100.00, 108.01)]
+        // I COULD CONTINUE TESTING ALL THE CROSS CURRENCY COMBINATIONS,
+        // BUT BEYOND THIS POINT ALL I WOULD BE VERIFYING IS WHETHER THE DATA IN THE CROSS TABLE IS COMPLETE AND COHESIVE.
+        // THE CALCULATIONS ARE NOW VERIFIED
         public void WHEN_Currency_Pair_Uses_A_Cross_Currency_THEN_CalculateExchangeAmount_SHOULD_Return_Converted_Amount(
             string baseCurrency,
             string termCurrency,

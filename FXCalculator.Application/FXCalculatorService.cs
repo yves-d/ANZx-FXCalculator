@@ -24,12 +24,17 @@ namespace FXCalculator.Application
 
             var exchangedAmount = exchangeInstrument.Exchange(amount);
 
+            return CreateNewFXCalculationResult(baseCurrency, termsCurrency, exchangedAmount, FXCalculationOutcomeEnum.Success);
+        }
+
+        private FXCalculationResult CreateNewFXCalculationResult(string baseCurrency, string termsCurrency, decimal amount, FXCalculationOutcomeEnum outcome)
+        {
             return new FXCalculationResult()
             {
                 BaseCurrency = baseCurrency,
-                TermsCurrency = termsCurrency, 
-                ExchangedAmount = exchangedAmount,
-                Outcome = FXCalculationOutcomeEnum.SUCCESS
+                TermsCurrency = termsCurrency,
+                ExchangedAmount = amount,
+                Outcome = outcome
             };
         }
     }

@@ -1,6 +1,6 @@
-﻿using FXCalculator.Application.Interfaces;
+﻿using FXCalculator.Application.Exceptions;
+using FXCalculator.Application.Interfaces;
 using FXCalculator.Common.Models;
-using FXCalculator.Data.Exceptions;
 using FXCalculator.Data.Interfaces;
 
 namespace FXCalculator.Application
@@ -19,17 +19,17 @@ namespace FXCalculator.Application
             var currencySettlementMethod = _currencyRepository.GetCurrencySettlementMethod(baseCurrency, termCurrency);
 
             if (currencySettlementMethod == null)
-                throw new SettlementMethodNotFoundException($"Could not find settlement method for base '{baseCurrency}' and term '{termCurrency}'");
+                throw new CrossViaMethodNotFoundException($"Could not find cross-via method for base '{baseCurrency}' and term '{termCurrency}'");
 
-            // swap the base and term around, to represent the complete table
-            if (currencySettlementMethod.Base == termCurrency && currencySettlementMethod.SettlementMethod != SettlementMethodEnum.OneToOne)
+            // swap the base and term around, to complete the inverse 'symmetrical' side of the table
+            if (currencySettlementMethod.Base == termCurrency && currencySettlementMethod.CrossVia != CrossViaEnum.OneToOne)
             {
                 return new CurrencySettlementMethod()
                 {
                     Base = baseCurrency,
                     Term = termCurrency,
                     SettlementCurrency = currencySettlementMethod.SettlementCurrency,
-                    SettlementMethod = FlipDirectIndirectConversion(currencySettlementMethod.SettlementMethod)
+                    CrossVia = FlipDirectIndirectConversion(currencySettlementMethod.CrossVia)
                 };
             }
 
@@ -38,8 +38,22 @@ namespace FXCalculator.Application
 
         public CurrencyPairExchangeRate GetCurrencyPairExchangeRate(string baseCurrency, string termCurrency)
         {
-            //return _currencyPairExchangeRates.SingleOrDefault(pair => pair.Base == baseCurrency && pair.Term == termCurrency);
-            return _currencyRepository.GetCurrencyPairExchangeRate(baseCurrency, termCurrency);
+            var exchangePair = _currencyRepository.GetCurrencyPairExchangeRate(baseCurrency, termCurrency);
+
+            if (exchangePair == null)
+                throw new CurrencyPairNotFoundException($"Currency pair not found for base '{baseCurrency}' and term '{termCurrency}'");
+
+            if(exchangePair.Base == termCurrency && exchangePair.Term == baseCurrency)
+            {
+                return new CurrencyPairExchangeRate()
+                {
+                    Base = baseCurrency,
+                    Term = termCurrency,
+                    Rate = 1 / exchangePair.Rate
+                };
+            }
+
+            return exchangePair;
         }
 
         public CurrencyDecimalPrecision GetCurrencyDecimalPrecision(string currency)
@@ -47,14 +61,14 @@ namespace FXCalculator.Application
             return _currencyRepository.GetCurrencyDecimalPrecision(currency);
         }
 
-        private SettlementMethodEnum FlipDirectIndirectConversion(SettlementMethodEnum savedSettlementMethod)
+        private CrossViaEnum FlipDirectIndirectConversion(CrossViaEnum crossVia)
         {
-            if (savedSettlementMethod == SettlementMethodEnum.Direct)
-                return SettlementMethodEnum.Inverted;
-            else if (savedSettlementMethod == SettlementMethodEnum.Inverted)
-                return SettlementMethodEnum.Direct;
+            if (crossVia == CrossViaEnum.Direct)
+                return CrossViaEnum.Inverted;
+            else if (crossVia == CrossViaEnum.Inverted)
+                return CrossViaEnum.Direct;
             else
-                return savedSettlementMethod;
+                return crossVia;
         }
     }
 }

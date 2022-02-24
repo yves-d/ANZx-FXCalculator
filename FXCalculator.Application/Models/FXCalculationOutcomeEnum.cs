@@ -2,9 +2,7 @@
 {
     public enum FXCalculationOutcomeEnum
     {
-        SUCCESS,
-        CURRENCYNOTFOUND,
-        PAIRNOTFOUND,
-        CANNOTCONVERTZEROAMOUNT
+        Success,
+        CannotConvertZeroAmount
     }
 }
