@@ -4,14 +4,13 @@
     {
         public static string ReadFromFile(string path, string fileName)
         {
-            var filePath = $@"{path}\{fileName}";
             try
             {
-                return File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath));
+                return File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path, fileName));
             }
             catch
             {
-                throw new DataFileReaderException($"Error loading file with name {fileName}");
+                throw new DataFileReaderException($"Error loading file '{path}/{fileName}'");
             }
         }
     }

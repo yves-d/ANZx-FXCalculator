@@ -9,13 +9,13 @@ using Xunit;
 
 namespace FXCalculator.Application.Tests
 {
-    public class FXCalculatorServiceSubCutaneousTests
+    public class FXCalculatorServiceSubcutaneousTests
     {
-        IFXCalculatorService _fxCalculatorService;
-        IServiceProvider _serviceProvider;
+        private IFXCalculatorService _fxCalculatorService;
+        private IServiceProvider _serviceProvider;
 
         // arrange
-        public FXCalculatorServiceSubCutaneousTests()
+        public FXCalculatorServiceSubcutaneousTests()
         {
             //setup our DI
             _serviceProvider = new ServiceCollection()
@@ -40,7 +40,6 @@ namespace FXCalculator.Application.Tests
 
             // assert
         }
-
         
         [Theory]
         [InlineData("AUD", "USD", 100.00, 83.71)]
@@ -149,6 +148,7 @@ namespace FXCalculator.Application.Tests
         [InlineData("AUD", "NZD", 100.00, 108.01)]
         // I COULD CONTINUE TESTING ALL THE CROSS CURRENCY COMBINATIONS,
         // BUT BEYOND THIS POINT ALL I WOULD BE VERIFYING IS WHETHER THE DATA IN THE CROSS TABLE IS COMPLETE AND COHESIVE.
+        // NO FURTHER VALUE IN TESTING THE CALCULATION LOGIC BY PASSING MORE CALCULATIONS
         // THE CALCULATIONS ARE NOW VERIFIED
         public void WHEN_Currency_Pair_Uses_A_Cross_Currency_THEN_CalculateExchangeAmount_SHOULD_Return_Converted_Amount(
             string baseCurrency,

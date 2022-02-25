@@ -3,12 +3,11 @@
     public class ExchangeInstrument
     {
         public decimal Rate { get; init; }
-        public int Precision { get; set; }
+        public int Precision { get; init; }
 
         public decimal Exchange(decimal amount)
         {
-            var exchangedAmount = amount * Rate;
-            return decimal.Round(exchangedAmount, Precision);
+            return decimal.Round(amount * Rate, Precision);
         }
     }
 }

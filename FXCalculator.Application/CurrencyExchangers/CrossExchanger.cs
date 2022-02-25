@@ -17,36 +17,37 @@ namespace FXCalculator.Application.CurrencyExchangers
 
         public ExchangeInstrument GetExchangeInstrument(CurrencySettlementMethod currencySettlementMethod)
         {
+            CurrencySettlementMethod nextCurrencySettlementMethod = currencySettlementMethod;
+            decimal baseToTermRate = STARTING_RATE;
             bool stillConvertingCurrency = true;
             int currencyHops = 0;
-            decimal rateFromBaseToCross = STARTING_RATE;
-            CurrencySettlementMethod nextCurrencySettlement = currencySettlementMethod;
+
             while (stillConvertingCurrency && currencyHops < MAX_CURRENCY_HOPS)
             {
-                if (nextCurrencySettlement.SettlementMethod == SettlementMethodEnum.Cross)
-                    nextCurrencySettlement = _currencyLoader.GetCurrencySettlementMethod(nextCurrencySettlement.Base, nextCurrencySettlement.SettlementCurrency);
+                if (nextCurrencySettlementMethod.SettlementMethod == SettlementMethodEnum.Cross)
+                    nextCurrencySettlementMethod = _currencyLoader.GetCurrencySettlementMethod(nextCurrencySettlementMethod.Base, nextCurrencySettlementMethod.SettlementCurrency);
 
-                if (nextCurrencySettlement.SettlementMethod != SettlementMethodEnum.Cross)
+                if (nextCurrencySettlementMethod.SettlementMethod != SettlementMethodEnum.Cross)
                 {
-                    var baseToCrossRate = _currencyLoader.GetCurrencyPairExchangeRate(nextCurrencySettlement.Base, nextCurrencySettlement.Term);
+                    var currentBaseToTermRate = _currencyLoader.GetCurrencyPairExchangeRate(nextCurrencySettlementMethod.Base, nextCurrencySettlementMethod.Term);
 
-                    rateFromBaseToCross *= baseToCrossRate.Rate;
+                    baseToTermRate *= currentBaseToTermRate.Rate;
 
-                    if (currencySettlementMethod.Term == nextCurrencySettlement.Term)
+                    if (currencySettlementMethod.Term == nextCurrencySettlementMethod.Term)
                         stillConvertingCurrency = false;
                     else
-                        nextCurrencySettlement = _currencyLoader.GetCurrencySettlementMethod(nextCurrencySettlement.Term, currencySettlementMethod.Term);
+                        nextCurrencySettlementMethod = _currencyLoader.GetCurrencySettlementMethod(nextCurrencySettlementMethod.Term, currencySettlementMethod.Term);
                 }
                 currencyHops++;
             }
 
             if (currencyHops >= MAX_CURRENCY_HOPS)
-                throw new CrossCurrencyNotFoundException($"Unable to find settlement currency to cross with. Search reached {currencyHops} hops.");
+                throw new UnableToCrossToTermCurrencyException($"Unable to cross to term currency '{currencySettlementMethod.Term}'. Search reached {currencyHops} hops.");
 
             var currencyPrecision = _currencyLoader.GetCurrencyDecimalPrecision(currencySettlementMethod.Term);
             return new ExchangeInstrument()
             {
-                Rate = rateFromBaseToCross,
+                Rate = baseToTermRate,
                 Precision = currencyPrecision.DecimalPlaces
             };
         }

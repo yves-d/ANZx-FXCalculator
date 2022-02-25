@@ -7,11 +7,7 @@ namespace FXCalculator.Application.Tests
 {
     public class CurrencyLoaderTests
     {
-        CurrencyLoaderTestHarness _testHarness;
-
-        // test data
-        private const string CROSS_METHOD_NOT_FOUND_EXCEPTION_MESSAGE_BTCUSD = "Could not find cross-via method for base 'BTC' and term 'USD'";
-        private const string CURRENCY_PAIR_NOT_FOUND_EXCEPTION_MESSAGE_BTCUSD = "Currency pair not found for base 'BTC' and term 'USD'";
+        private CurrencyLoaderTestHarness _testHarness;
 
         public CurrencyLoaderTests()
         {
@@ -19,7 +15,7 @@ namespace FXCalculator.Application.Tests
         }
 
         [Fact]
-        public void WHEN_Currency_Is_Not_Found_THEN_GetCurrencySettlementMethod_SHOULD_Throw_CrossViaMethodNotFoundException()
+        public void WHEN_Currency_Is_Not_Found_THEN_GetCurrencySettlementMethod_SHOULD_Throw_CurrencySettlementMethodNotFoundException()
         {
             // arrange
             _testHarness
@@ -30,12 +26,12 @@ namespace FXCalculator.Application.Tests
             Action act = () => _testHarness.Execute_GetCurrencySettlementMethod();
 
             // assert
-            act.Should().Throw<CrossViaMethodNotFoundException>()
-                .WithMessage(CROSS_METHOD_NOT_FOUND_EXCEPTION_MESSAGE_BTCUSD);
+            act.Should().Throw<CurrencySettlementMethodNotFoundException>()
+                .WithMessage(_testHarness.CurrencySettlementMethodNotFoundExceptionMessage);
         }
 
         [Fact]
-        public void WHEN_Currency_Pair_Rate_Is_Not_Found_THEN_GetCurrencyPairExchangeRate_SHOULD_Throw_CurrencyPairNotFoundException()
+        public void WHEN_Currency_Pair_Rate_Is_Not_Found_THEN_GetCurrencyPairExchangeRate_SHOULD_Throw_CurrencyPairExchangeRateNotFoundException()
         {
             // arrange
             _testHarness
@@ -46,8 +42,8 @@ namespace FXCalculator.Application.Tests
             Action act = () => _testHarness.Execute_GetCurrencyPairExchangeRate();
 
             // assert
-            act.Should().Throw<CurrencyPairNotFoundException>()
-                .WithMessage(CURRENCY_PAIR_NOT_FOUND_EXCEPTION_MESSAGE_BTCUSD);
+            act.Should().Throw<CurrencyPairExchangeRateNotFoundException>()
+                .WithMessage(_testHarness.CurrencyPairExchangeRateNotFoundExceptionMessage);
         }
 
         [Fact]

@@ -7,12 +7,16 @@ namespace FXCalculator.Application.Tests
 {
     public  class CurrencyLoaderTestHarness
     {
-        ICurrencyLoader _currencyLoader;
-        ICurrencyRepository _currencyRepository;
+        private ICurrencyLoader _currencyLoader;
+
+        // injectables
+        private ICurrencyRepository _currencyRepository;
 
         // test data
         public string Base { get; private set; } = "";
         public string Term { get; private set; } = "";
+        public string CurrencySettlementMethodNotFoundExceptionMessage => $"Could not find currency settlement method for base '{Base}' and term '{Term}'";
+        public string CurrencyPairExchangeRateNotFoundExceptionMessage => $"Currency pair exchange rate not found for base '{Base}' and term '{Term}'";
 
         public CurrencyLoaderTestHarness()
         {

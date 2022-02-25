@@ -13,9 +13,9 @@ namespace FXCalculator.Data
         private const string FILENAME_CURRENCY_DECIMAL_PRECISION = "CurrencyDecimalPrecision.json";
         private const string FILENAME_CURRENCY_SETTLEMENT_METHOD = "SettlementCurrencies.json";
 
-        private List<CurrencyPairExchangeRate> _currencyPairExchangeRates = new List<CurrencyPairExchangeRate>();
-        private List<CurrencyDecimalPrecision> _currencyDecimalPrecisions = new List<CurrencyDecimalPrecision>();
-        private List<CurrencySettlementMethod> _currencySettlementMethods = new List<CurrencySettlementMethod>();
+        private readonly List<CurrencyPairExchangeRate> _currencyPairExchangeRates = new List<CurrencyPairExchangeRate>();
+        private readonly List<CurrencyDecimalPrecision> _currencyDecimalPrecisions = new List<CurrencyDecimalPrecision>();
+        private readonly List<CurrencySettlementMethod> _currencySettlementMethods = new List<CurrencySettlementMethod>();
 
         public CurrencyRepository()
         {
@@ -51,22 +51,19 @@ namespace FXCalculator.Data
 
         private void LoadCurrencyPairExchangeRates()
         {
-            var rawData = LoadRawFileData(CURRENCY_DATA_FOLDER, FILENAME_CURRENCY_PAIR_EXCHANGE_RATES);
-                
+            var rawData = LoadRawFileData(CURRENCY_DATA_FOLDER, FILENAME_CURRENCY_PAIR_EXCHANGE_RATES); 
             _currencyPairExchangeRates.AddRange(JsonConvert.DeserializeObject<List<CurrencyPairExchangeRate>>(rawData));
         }
 
         private void LoadCurrencyDecimalPrecision()
         {
             var rawData = LoadRawFileData(CURRENCY_DATA_FOLDER, FILENAME_CURRENCY_DECIMAL_PRECISION);
-
             _currencyDecimalPrecisions.AddRange(JsonConvert.DeserializeObject<List<CurrencyDecimalPrecision>>(rawData));
         }
 
         private void LoadCurrencySettlementMethods()
         {
             var rawData = LoadRawFileData(CURRENCY_DATA_FOLDER, FILENAME_CURRENCY_SETTLEMENT_METHOD);
-
             _currencySettlementMethods.AddRange(JsonConvert.DeserializeObject<List<CurrencySettlementMethod>>(rawData));
         }
 
@@ -74,7 +71,7 @@ namespace FXCalculator.Data
         {
             var rawData = DataFileReader.ReadFromFile(path, fileName);
             if (rawData == null)
-                throw new DatastoreReadFailureException($"Unable to read from {path}/{fileName}");
+                throw new DatastoreReadFailureException($"Data from '{path}/{fileName}' is empty!");
 
             return rawData;
         }

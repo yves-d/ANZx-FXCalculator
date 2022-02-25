@@ -22,7 +22,7 @@ namespace FXCalculator.Application
             if (_currencyExchangers.ContainsKey(settlementMethodEnum))
                 return _currencyExchangers[settlementMethodEnum]();
 
-            throw new CurrencyExchangerNotImplementedException($"Crypto Service not implemented - {settlementMethodEnum}");
+            throw new CurrencyExchangerNotImplementedException($"Currency exchanger not implement for settlement method '{settlementMethodEnum}'!");
         }
 
         private void LoadCurrencyExchangeServices()

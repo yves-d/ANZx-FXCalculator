@@ -5,8 +5,8 @@
         public string Base { get; init; }
         public string Term { get; init; }
         public CrossViaEnum CrossVia { get; init; }
-        public SettlementMethodEnum SettlementMethod => GetSettlementMethod();
         public string? SettlementCurrency { get; init; }
+        public SettlementMethodEnum SettlementMethod => GetSettlementMethod();
 
         private SettlementMethodEnum GetSettlementMethod()
         {

@@ -19,9 +19,9 @@ namespace FXCalculator.Application
             var currencySettlementMethod = _currencyRepository.GetCurrencySettlementMethod(baseCurrency, termCurrency);
 
             if (currencySettlementMethod == null)
-                throw new CrossViaMethodNotFoundException($"Could not find cross-via method for base '{baseCurrency}' and term '{termCurrency}'");
+                throw new CurrencySettlementMethodNotFoundException($"Could not find currency settlement method for base '{baseCurrency}' and term '{termCurrency}'");
 
-            // swap the base and term around, to complete the inverse 'symmetrical' side of the table
+            // swap the base and term around, to complete the inverse 'symmetrical' side of the data set
             if (currencySettlementMethod.Base == termCurrency && currencySettlementMethod.CrossVia != CrossViaEnum.OneToOne)
             {
                 return new CurrencySettlementMethod()
@@ -41,8 +41,9 @@ namespace FXCalculator.Application
             var exchangePair = _currencyRepository.GetCurrencyPairExchangeRate(baseCurrency, termCurrency);
 
             if (exchangePair == null)
-                throw new CurrencyPairNotFoundException($"Currency pair not found for base '{baseCurrency}' and term '{termCurrency}'");
+                throw new CurrencyPairExchangeRateNotFoundException($"Currency pair exchange rate not found for base '{baseCurrency}' and term '{termCurrency}'");
 
+            // handle inverse pairs
             if(exchangePair.Base == termCurrency && exchangePair.Term == baseCurrency)
             {
                 return new CurrencyPairExchangeRate()
