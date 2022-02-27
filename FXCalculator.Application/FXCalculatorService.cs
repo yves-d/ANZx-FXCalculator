@@ -24,17 +24,20 @@ namespace FXCalculator.Application
 
             var exchangedAmount = exchangeInstrument.Exchange(amount);
 
-            return CreateNewFXCalculationResult(baseCurrency, termsCurrency, exchangedAmount, FXCalculationOutcomeEnum.Success);
+            return CreateNewFXCalculationResult(baseCurrency, termsCurrency, amount, exchangedAmount);
         }
 
-        private FXCalculationResult CreateNewFXCalculationResult(string baseCurrency, string termsCurrency, decimal amount, FXCalculationOutcomeEnum outcome)
+        private FXCalculationResult CreateNewFXCalculationResult(string baseCurrency, string termsCurrency, decimal originalAmount, decimal exchangedAmount)
         {
+            var baseCurrencyDecimalPrecision = _currencyLoader.GetCurrencyDecimalPrecision(baseCurrency);
+            decimal roundedBaseCurrencyOriginalAmount = decimal.Round(originalAmount, baseCurrencyDecimalPrecision.DecimalPlaces);
+
             return new FXCalculationResult()
             {
                 BaseCurrency = baseCurrency,
                 TermsCurrency = termsCurrency,
-                ExchangedAmount = amount,
-                Outcome = outcome
+                OriginalAmount = roundedBaseCurrencyOriginalAmount,
+                ExchangedAmount = exchangedAmount
             };
         }
     }

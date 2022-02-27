@@ -30,16 +30,6 @@ namespace FXCalculator.Application.Tests
 
             _fxCalculatorService = _serviceProvider.GetService<IFXCalculatorService>();
         }
-
-        [Fact]
-        public void WHEN_Currency_Amount_Is_Zero_THEN_CalculateExchangeAmount_SHOULD_Return_CANNOTCONVERTZEROAMOUNT()
-        {
-            // arrange
-
-            // act
-
-            // assert
-        }
         
         [Theory]
         [InlineData("AUD", "USD", 100.00, 83.71)]
@@ -101,29 +91,7 @@ namespace FXCalculator.Application.Tests
         [InlineData("NOK", "NOK", 100.00, 100.00)]
         [InlineData("NZD", "NZD", 100.00, 100.00)]
         [InlineData("USD", "USD", 100.00, 100.00)]
-        [InlineData("AUD", "AUD", 100.01, 100.01)]
-        [InlineData("CAD", "CAD", 100.01, 100.01)]
-        [InlineData("CNY", "CNY", 100.01, 100.01)]
-        [InlineData("CZK", "CZK", 100.01, 100.01)]
-        [InlineData("DKK", "DKK", 100.01, 100.01)]
-        [InlineData("EUR", "EUR", 100.01, 100.01)]
-        [InlineData("GBP", "GBP", 100.01, 100.01)]
-        [InlineData("JPY", "JPY", 100.01, 100.00)]
-        [InlineData("NOK", "NOK", 100.01, 100.01)]
-        [InlineData("NZD", "NZD", 100.01, 100.01)]
-        [InlineData("USD", "USD", 100.01, 100.01)]
-        [InlineData("AUD", "AUD", 100.90, 100.90)]
-        [InlineData("CAD", "CAD", 100.90, 100.90)]
-        [InlineData("CNY", "CNY", 100.90, 100.90)]
-        [InlineData("CZK", "CZK", 100.90, 100.90)]
-        [InlineData("DKK", "DKK", 100.90, 100.90)]
-        [InlineData("EUR", "EUR", 100.90, 100.90)]
-        [InlineData("GBP", "GBP", 100.90, 100.90)]
-        [InlineData("JPY", "JPY", 100.90, 101.00)]
-        [InlineData("NOK", "NOK", 100.90, 100.90)]
-        [InlineData("NZD", "NZD", 100.90, 100.90)]
-        [InlineData("USD", "USD", 100.90, 100.90)]
-        public void WHEN_Currency_Pair_Is_OneToOne_THEN_CalculateExchangeAmount_SHOULD_Return_Same_Amount_Rounded_To_Currency_Decimal_Precision(
+        public void WHEN_Currency_Pair_Is_OneToOne_THEN_CalculateExchangeAmount_SHOULD_Return_OneToOne_ExchangedAmount(
             string baseCurrency,
             string termCurrency,
             decimal amountToConvert,
@@ -161,6 +129,87 @@ namespace FXCalculator.Application.Tests
 
             // assert
             convertedAmount.ExchangedAmount.Should().Be(expectedAmount);
+        }
+
+        [Theory]
+        [InlineData("AUD", "AUD", 100, 100.00)]
+        [InlineData("CAD", "CAD", 100, 100.00)]
+        [InlineData("CNY", "CNY", 100, 100.00)]
+        [InlineData("CZK", "CZK", 100, 100.00)]
+        [InlineData("DKK", "DKK", 100, 100.00)]
+        [InlineData("EUR", "EUR", 100, 100.00)]
+        [InlineData("GBP", "GBP", 100, 100.00)]
+        [InlineData("JPY", "JPY", 100, 100.00)]
+        [InlineData("NOK", "NOK", 100, 100.00)]
+        [InlineData("NZD", "NZD", 100, 100.00)]
+        [InlineData("USD", "USD", 100, 100.00)]
+        [InlineData("AUD", "AUD", 100.00, 100.00)]
+        [InlineData("CAD", "CAD", 100.00, 100.00)]
+        [InlineData("CNY", "CNY", 100.00, 100.00)]
+        [InlineData("CZK", "CZK", 100.00, 100.00)]
+        [InlineData("DKK", "DKK", 100.00, 100.00)]
+        [InlineData("EUR", "EUR", 100.00, 100.00)]
+        [InlineData("GBP", "GBP", 100.00, 100.00)]
+        [InlineData("JPY", "JPY", 100.00, 100.00)]
+        [InlineData("NOK", "NOK", 100.00, 100.00)]
+        [InlineData("NZD", "NZD", 100.00, 100.00)]
+        [InlineData("USD", "USD", 100.00, 100.00)]
+        [InlineData("AUD", "AUD", 100.01, 100.01)]
+        [InlineData("CAD", "CAD", 100.01, 100.01)]
+        [InlineData("CNY", "CNY", 100.01, 100.01)]
+        [InlineData("CZK", "CZK", 100.01, 100.01)]
+        [InlineData("DKK", "DKK", 100.01, 100.01)]
+        [InlineData("EUR", "EUR", 100.01, 100.01)]
+        [InlineData("GBP", "GBP", 100.01, 100.01)]
+        [InlineData("JPY", "JPY", 100.01, 100.00)]
+        [InlineData("NOK", "NOK", 100.01, 100.01)]
+        [InlineData("NZD", "NZD", 100.01, 100.01)]
+        [InlineData("USD", "USD", 100.01, 100.01)]
+        [InlineData("AUD", "AUD", 100.90, 100.90)]
+        [InlineData("CAD", "CAD", 100.90, 100.90)]
+        [InlineData("CNY", "CNY", 100.90, 100.90)]
+        [InlineData("CZK", "CZK", 100.90, 100.90)]
+        [InlineData("DKK", "DKK", 100.90, 100.90)]
+        [InlineData("EUR", "EUR", 100.90, 100.90)]
+        [InlineData("GBP", "GBP", 100.90, 100.90)]
+        [InlineData("JPY", "JPY", 100.90, 101.00)]
+        [InlineData("NOK", "NOK", 100.90, 100.90)]
+        [InlineData("NZD", "NZD", 100.90, 100.90)]
+        [InlineData("USD", "USD", 100.90, 100.90)]
+        [InlineData("AUD", "AUD", 100.901, 100.90)]
+        [InlineData("CAD", "CAD", 100.901, 100.90)]
+        [InlineData("CNY", "CNY", 100.901, 100.90)]
+        [InlineData("CZK", "CZK", 100.901, 100.90)]
+        [InlineData("DKK", "DKK", 100.901, 100.90)]
+        [InlineData("EUR", "EUR", 100.901, 100.90)]
+        [InlineData("GBP", "GBP", 100.901, 100.90)]
+        [InlineData("JPY", "JPY", 100.901, 101.00)]
+        [InlineData("NOK", "NOK", 100.901, 100.90)]
+        [InlineData("NZD", "NZD", 100.901, 100.90)]
+        [InlineData("USD", "USD", 100.901, 100.90)]
+        [InlineData("AUD", "AUD", 100.909, 100.91)]
+        [InlineData("CAD", "CAD", 100.909, 100.91)]
+        [InlineData("CNY", "CNY", 100.909, 100.91)]
+        [InlineData("CZK", "CZK", 100.909, 100.91)]
+        [InlineData("DKK", "DKK", 100.909, 100.91)]
+        [InlineData("EUR", "EUR", 100.909, 100.91)]
+        [InlineData("GBP", "GBP", 100.909, 100.91)]
+        [InlineData("JPY", "JPY", 100.909, 101.00)]
+        [InlineData("NOK", "NOK", 100.909, 100.91)]
+        [InlineData("NZD", "NZD", 100.909, 100.91)]
+        [InlineData("USD", "USD", 100.909, 100.91)]
+        public void WHEN_Currency_Amounts_Have_Varying_Decimal_Places_THEN_CalculateExchangeAmount_SHOULD_Return_Original_AND_ExchangedAmount_Rounded_To_Currency_Decimal_Precision(
+            string baseCurrency,
+            string termCurrency,
+            decimal amountToConvert,
+            decimal expectedAmount)
+        {
+            // arrange & act
+            var convertedAmount = _fxCalculatorService.CalculateExchangeAmount(baseCurrency, termCurrency, amountToConvert);
+
+            // assert
+            convertedAmount.ExchangedAmount.Should().Be(expectedAmount);
+            convertedAmount.OriginalAmount.Should().Be(expectedAmount);
         }
     }
 }
