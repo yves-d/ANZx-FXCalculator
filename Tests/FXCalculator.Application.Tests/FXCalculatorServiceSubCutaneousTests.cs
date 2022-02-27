@@ -1,6 +1,7 @@
 using FluentAssertions;
 using FXCalculator.Application.CurrencyExchangers;
 using FXCalculator.Application.Interfaces;
+using FXCalculator.Common.Logger;
 using FXCalculator.Data;
 using FXCalculator.Data.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,8 @@ namespace FXCalculator.Application.Tests
         {
             //setup our DI
             _serviceProvider = new ServiceCollection()
+                .AddLogging()
+                .AddSingleton(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>))
                 .AddScoped<IFXCalculatorService, FXCalculatorService>()
                 .AddScoped<ICurrencyLoader, CurrencyLoader>()
                 .AddSingleton<ICurrencyRepository, CurrencyRepository>()

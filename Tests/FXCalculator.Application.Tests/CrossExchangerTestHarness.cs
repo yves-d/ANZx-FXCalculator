@@ -14,7 +14,7 @@ namespace FXCalculator.Application.Tests
 
         // test data
         private CurrencySettlementMethod startingCurrencySettlementMethod;
-        public string UnableToCrossToTermCurrencyExceptionMessage => $"Unable to cross to term currency '{startingCurrencySettlementMethod.Term}'. Search reached 10 hops.";
+        public string UnableToCrossToTermCurrencyExceptionMessage => $"Unable to find cross rates for term currency '{startingCurrencySettlementMethod.Term}'.";
 
         public CrossExchangerTestHarness()
         {

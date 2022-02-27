@@ -1,8 +1,4 @@
 using FluentAssertions;
-using FXCalculator.Application.Exceptions;
-using FXCalculator.Application.Interfaces;
-using FXCalculator.Application.Models;
-using FXCalculator.Console.Interfaces;
 using NSubstitute;
 using Xunit;
 
@@ -10,12 +6,11 @@ namespace FXCalculator.Console.Tests
 {
     public class FXCalculatorConsoleServiceTests
     {
-        private IFXCalculatorConsoleService _fxCalculatorConsoleService;
-        private IFXCalculatorService _fxCalculatorService;
+        private FXCalculatorConsoleServiceTestHarness _testHarness;
 
         public FXCalculatorConsoleServiceTests()
         {
-            _fxCalculatorService = Substitute.For<IFXCalculatorService>();
+            _testHarness = new FXCalculatorConsoleServiceTestHarness();
         }
 
         [Theory]
@@ -34,10 +29,12 @@ namespace FXCalculator.Console.Tests
             string userInput)
         {
             // arrange
-            _fxCalculatorConsoleService = new FXCalculatorConsoleService(_fxCalculatorService);
+            _testHarness
+                .WithUserInput(userInput)
+                .BuildTestCase();
 
             // act
-            var result = _fxCalculatorConsoleService.GetCurrencyConversionResponse(userInput);
+            var result = _testHarness.Execute_GetCurrencyConversionResponse();
 
             // assert
             result.Should().Be("Input is invalid! Please try again.");
@@ -55,130 +52,81 @@ namespace FXCalculator.Console.Tests
             decimal amountExchanged)
         {
             // arrange
-            var expectedOutput = string.Format("{0} {1} = {2} {3}", baseCurrency, amountToExchange, termCurrency, amountExchanged);
-            var calculatedExchangeResponse = new FXCalculationResult()
-            {
-                BaseCurrency = baseCurrency,
-                TermsCurrency = termCurrency,
-                OriginalAmount = amountToExchange,
-                ExchangedAmount = amountExchanged
-            };
-            _fxCalculatorService.CalculateExchangeAmount(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<decimal>()).Returns(calculatedExchangeResponse);
-            _fxCalculatorConsoleService = new FXCalculatorConsoleService(_fxCalculatorService);
+            _testHarness
+                .WithUserInput(userInput)
+                .WithCalculateExchangeAmountReturningCalculationResult(baseCurrency, termCurrency, amountToExchange, amountExchanged)
+                .BuildTestCase();
 
             // act
-            var result = _fxCalculatorConsoleService.GetCurrencyConversionResponse(userInput);
+            var result = _testHarness.Execute_GetCurrencyConversionResponse();
 
             // assert
-            result.Should().Be(expectedOutput);
+            result.Should().Be(_testHarness.ExpectedConsoleOutput);
         }
 
-        [Theory]
-        [InlineData("AUD 100.00 IN BTC", "AUD", "BTC")]
-        public void WHEN_CalculateExchangeAmount_Throws_CurrencySettlementMethodNotFoundException_THEN_GetCurrencyConversionResponse_Should_Return_Appropriate_Error_Message(
-            string userInput,
-            string baseCurrency,
-            string termCurrency)
+        [Fact]
+        public void WHEN_CalculateExchangeAmount_Throws_CurrencySettlementMethodNotFoundException_THEN_GetCurrencyConversionResponse_Should_Return_Appropriate_Error_Message()
         {
             // arrange
-            var expectedExceptionMessage = $"Could not find currency settlement method for base '{baseCurrency}' and term '{termCurrency}'";
-            var calculatedExchangeResponse = new FXCalculationResult()
-            {
-                BaseCurrency = baseCurrency,
-                TermsCurrency = termCurrency,
-                OriginalAmount = 100.00m,
-                ExchangedAmount = 100.00m
-            };
-            _fxCalculatorService.CalculateExchangeAmount(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<decimal>())
-                .Returns(x => throw new CurrencySettlementMethodNotFoundException());
-            _fxCalculatorConsoleService = new FXCalculatorConsoleService(_fxCalculatorService);
+            _testHarness
+                .WithUserInput("AUD 100.00 IN BTC")
+                .WithCurrencySettlementMethodNotFoundException("AUD", "BTC")
+                .BuildTestCase();
 
             // act
-            var result = _fxCalculatorConsoleService.GetCurrencyConversionResponse(userInput);
+            var result = _testHarness.Execute_GetCurrencyConversionResponse();
 
             // assert
-            result.Should().Be(expectedExceptionMessage);
+            result.Should().Be(_testHarness.ExpectedConsoleOutput);
         }
 
-        [Theory]
-        [InlineData("AUD 100.00 IN BTC", "AUD", "BTC")]
-        public void WHEN_CalculateExchangeAmount_Throws_CurrencyPairExchangeRateNotFoundException_THEN_GetCurrencyConversionResponse_Should_Return_Appropriate_Error_Message(
-            string userInput,
-            string baseCurrency,
-            string termCurrency)
+        [Fact]
+        public void WHEN_CalculateExchangeAmount_Throws_CurrencyPairExchangeRateNotFoundException_THEN_GetCurrencyConversionResponse_Should_Return_Appropriate_Error_Message()
         {
             // arrange
-            var expectedExceptionMessage = $"Currency pair exchange rate not found for base '{baseCurrency}' and term '{termCurrency}'";
-            var calculatedExchangeResponse = new FXCalculationResult()
-            {
-                BaseCurrency = baseCurrency,
-                TermsCurrency = termCurrency,
-                OriginalAmount = 100.00m,
-                ExchangedAmount = 100.00m
-            };
-            _fxCalculatorService.CalculateExchangeAmount(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<decimal>())
-                .Returns(x => throw new CurrencyPairExchangeRateNotFoundException());
-            _fxCalculatorConsoleService = new FXCalculatorConsoleService(_fxCalculatorService);
+            _testHarness
+                .WithUserInput("AUD 100.00 IN BTC")
+                .WithCurrencyPairExchangeRateNotFoundException("AUD", "BTC")
+                .BuildTestCase();
 
             // act
-            var result = _fxCalculatorConsoleService.GetCurrencyConversionResponse(userInput);
+            var result = _testHarness.Execute_GetCurrencyConversionResponse();
 
             // assert
-            result.Should().Be(expectedExceptionMessage);
+            result.Should().Be(_testHarness.ExpectedConsoleOutput);
         }
 
-        [Theory]
-        [InlineData("AUD 100.00 IN BTC", "AUD", "BTC")]
-        public void WHEN_CalculateExchangeAmount_Throws_CurrencyExchangerNotImplementedException_THEN_GetCurrencyConversionResponse_Should_Return_Appropriate_Error_Message(
-            string userInput,
-            string baseCurrency,
-            string termCurrency)
+        [Fact]
+        public void WHEN_CalculateExchangeAmount_Throws_CurrencyExchangerNotImplementedException_THEN_GetCurrencyConversionResponse_Should_Return_Generic_Error_Message_And_Log_Exception_Message()
         {
             // arrange
-            var expectedExceptionMessage = $"Currency exchanger not implement for settlement method 'None'!";
-            var calculatedExchangeResponse = new FXCalculationResult()
-            {
-                BaseCurrency = baseCurrency,
-                TermsCurrency = termCurrency,
-                OriginalAmount = 100.00m,
-                ExchangedAmount = 100.00m
-            };
-            _fxCalculatorService.CalculateExchangeAmount(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<decimal>())
-                .Returns(x => throw new CurrencyExchangerNotImplementedException());
-            _fxCalculatorConsoleService = new FXCalculatorConsoleService(_fxCalculatorService);
+            _testHarness
+                .WithUserInput("AUD 100.00 IN BTC")
+                .WithCurrencyExchangerNotImplementedException()
+                .BuildTestCase();
 
             // act
-            var result = _fxCalculatorConsoleService.GetCurrencyConversionResponse(userInput);
+            var result = _testHarness.Execute_GetCurrencyConversionResponse();
 
             // assert
-            result.Should().Be(expectedExceptionMessage);
+            result.Should().Be(_testHarness.ExpectedConsoleOutput);
+            _testHarness._logger.Received(1).LogError(_testHarness.ExpectedLogMessage);
         }
 
-        [Theory]
-        [InlineData("AUD 100.00 IN BTC", "AUD", "BTC")]
-        public void WHEN_CalculateExchangeAmount_Throws_UnableToCrossToTermCurrencyException_THEN_GetCurrencyConversionResponse_Should_Return_Appropriate_Error_Message(
-            string userInput,
-            string baseCurrency,
-            string termCurrency)
+        [Fact]
+        public void WHEN_CalculateExchangeAmount_Throws_UnableToCrossToTermCurrencyException_THEN_GetCurrencyConversionResponse_Should_Return_Appropriate_Error_Message()
         {
             // arrange
-            var expectedExceptionMessage = $"Unable to cross to term currency 'termCurrency'. Search reached 10 hops.";
-            var calculatedExchangeResponse = new FXCalculationResult()
-            {
-                BaseCurrency = baseCurrency,
-                TermsCurrency = termCurrency,
-                OriginalAmount = 100.00m,
-                ExchangedAmount = 100.00m
-            };
-            _fxCalculatorService.CalculateExchangeAmount(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<decimal>())
-                .Returns(x => throw new UnableToCrossToTermCurrencyException());
-            _fxCalculatorConsoleService = new FXCalculatorConsoleService(_fxCalculatorService);
+            _testHarness
+                .WithUserInput("AUD 100.00 IN BTC")
+                .WithUnableToCrossToTermCurrencyException("AUD")
+                .BuildTestCase();
 
             // act
-            var result = _fxCalculatorConsoleService.GetCurrencyConversionResponse(userInput);
+            var result = _testHarness.Execute_GetCurrencyConversionResponse();
 
             // assert
-            result.Should().Be(expectedExceptionMessage);
+            result.Should().Be(_testHarness.ExpectedConsoleOutput);
         }
     }
 }

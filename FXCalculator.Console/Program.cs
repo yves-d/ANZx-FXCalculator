@@ -1,6 +1,7 @@
 ﻿using FXCalculator.Application;
 using FXCalculator.Application.CurrencyExchangers;
 using FXCalculator.Application.Interfaces;
+using FXCalculator.Common.Logger;
 using FXCalculator.Console;
 using FXCalculator.Console.Interfaces;
 using FXCalculator.Data;
@@ -9,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 //setup our DI
 IServiceProvider _serviceProvider = new ServiceCollection()
+    .AddLogging()
+    .AddSingleton(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>))
     .AddScoped<IFXCalculatorConsoleService, FXCalculatorConsoleService>()
     .AddScoped<IFXCalculatorService, FXCalculatorService>()
     .AddScoped<ICurrencyLoader, CurrencyLoader>()
@@ -23,15 +26,15 @@ IFXCalculatorConsoleService _fxCalculatorConsoleService = _serviceProvider.GetSe
 
 Console.WriteLine("Welcome to the ANZx FXCalculator!" + Environment.NewLine);
 Console.WriteLine("---------------------------------" + Environment.NewLine);
+Console.WriteLine("Type 'exit' at any time, to end the program" + Environment.NewLine);
+Console.WriteLine(Environment.NewLine);
+Console.WriteLine("To convert a currency, enter the base currency, followed by the amount, then the word 'in', and finally the term currency you wish to convert to." + Environment.NewLine);
+Console.WriteLine("For example... AUD 100.00 in USD" + Environment.NewLine);
 
 bool exit = false;
 while (!exit)
 {
-    Console.WriteLine(Environment.NewLine);
-    Console.WriteLine("Type 'exit' at any time, to end the program" + Environment.NewLine);
-    Console.WriteLine(Environment.NewLine);
-    Console.WriteLine("To convert a currency, enter the base currency, followed by the amount, the word 'in', and finally the term currency you wish to conver to. For example..." + Environment.NewLine);
-    Console.WriteLine("AUD 100.00 in USD" + Environment.NewLine);
+    Console.WriteLine("Please Enter your FX request: ");
 
     var command = Console.ReadLine();
     if (!string.IsNullOrEmpty(command))
@@ -49,7 +52,6 @@ while (!exit)
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
-            command = Console.ReadLine();
         }
     }
 }

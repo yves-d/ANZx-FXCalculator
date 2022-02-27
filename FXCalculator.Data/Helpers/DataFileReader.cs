@@ -10,7 +10,7 @@
             }
             catch
             {
-                throw new DataFileReaderException($"Error loading file '{path}/{fileName}'");
+                throw new FileNotFoundException($"Error loading file '{path}/{fileName}'");
             }
         }
     }

@@ -78,5 +78,8 @@ ANZx - Programming Exercise – FX Calculator
 16. We can handle the issue of incorrect table guidance by doing away with the distinction between direct and inverted, as far as the service, factory, and currency exchangers are concerned. In effect, the parameter for direct/inverted as seen in the table, is now meaningless. Instead, we can work out the correct rate when we ask for the exchange pair from the 'CurrencyLoader'.
 17. The CurrencyLoader can work out if a pair it has been provided is inverted or not (when viewed against the currency pair rate table), and switch up the rate (1/rate) on the fly.
 15. Tidied up the unit tests.
+16. Created 'FXCalculator.Console' project to contain the console app to interact through.
+17. Created 'FXCalculatorConsoleService' to handle validation of user input, and act as the main entry point to the 'FXCalculatorService'.
+18. Went with a RegEx approach to validate user input - seemed like it would simplify things.
 16. Created the Dockerfile, as an option for running the solution.
 17. Filled out the rest of the README.md

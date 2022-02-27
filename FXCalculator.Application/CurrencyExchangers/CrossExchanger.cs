@@ -42,7 +42,7 @@ namespace FXCalculator.Application.CurrencyExchangers
             }
 
             if (currencyHops >= MAX_CURRENCY_HOPS)
-                throw new UnableToCrossToTermCurrencyException($"Unable to cross to term currency '{currencySettlementMethod.Term}'. Search reached {currencyHops} hops.");
+                throw new UnableToCrossToTermCurrencyException($"Unable to find cross rates for term currency '{currencySettlementMethod.Term}'.");
 
             var currencyPrecision = _currencyLoader.GetCurrencyDecimalPrecision(currencySettlementMethod.Term);
             return new ExchangeInstrument()
