@@ -7,7 +7,7 @@ namespace FXCalculator.Application.CurrencyExchangers
     public class CrossExchanger : IExchangeCurrency
     {
         private readonly ICurrencyLoader _currencyLoader;
-        private const int MAX_CURRENCY_HOPS = 10;
+        private const int MAX_CURRENCY_HOPS = 5;
         private const decimal STARTING_RATE = 1.00m;
 
         public CrossExchanger(ICurrencyLoader currencyLoader)

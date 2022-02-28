@@ -12,7 +12,6 @@ namespace FXCalculator.Console
         private readonly ILoggerAdapter<IFXCalculatorConsoleService> _logger;
         private readonly IFXCalculatorService _fxCalculatorService;
 
-
         private const string USER_INPUT_REGEX_VALIDATION = @"^[A-Z]+\s[0-9]*\.?[0-9]+\s(IN)+\s[A-Z]+$";
         private const string USER_INPUT_IS_INVALID_MESSAGE = "Input is invalid! Please try again.";
         private const string VALID_CURRENCY_EXCHANGE_RESPONSE = "{0} {1} = {2} {3}";
@@ -50,7 +49,6 @@ namespace FXCalculator.Console
             {
                 return GetExceptionMessageForUser(ex);
             }
-
         }
 
         private bool InputIsInvalid(string userInput)

@@ -27,7 +27,6 @@ IFXCalculatorConsoleService _fxCalculatorConsoleService = _serviceProvider.GetSe
 Console.WriteLine("Welcome to the ANZx FXCalculator!" + Environment.NewLine);
 Console.WriteLine("---------------------------------" + Environment.NewLine);
 Console.WriteLine("Type 'exit' at any time, to end the program" + Environment.NewLine);
-Console.WriteLine(Environment.NewLine);
 Console.WriteLine("To convert a currency, enter the base currency, followed by the amount, then the word 'in', and finally the term currency you wish to convert to." + Environment.NewLine);
 Console.WriteLine("For example... AUD 100.00 in USD" + Environment.NewLine);
 
