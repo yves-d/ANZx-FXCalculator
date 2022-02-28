@@ -22,9 +22,7 @@ Within Visual Studio, the solution can be debugged as a .NetCore app, by running
 
 At a minimum, you would need to download the Community version of Visual Studio, from the [Visual Studio website](https://visualstudio.microsoft.com/downloads/).
 
-#### Command Line
-
-##### Running the solution from the command line
+#### Command Line - Running the FXCalculator Console
 The command line option is probably the most straight-forward method of running the solution.
 
 If you haven't already, install the [.Net Core 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) from Microsoft.
@@ -37,7 +35,7 @@ Exact syntax may very, depending on your machine (Windows / Mac / Linux). The ab
 
 This should build and run the solution.
 
-##### Running the unit tests from the command line
+#### Command Line - Running the unit tests
 Similarly, you can also run the unit tests from the command line.
 
 From the same folder location as above...
