@@ -95,15 +95,15 @@ For the FXCalculator.Console tests, type or copy/paste:
     - Can't exchange negative amounts, so yes.
 
     e. Should we return an exception from the Application layer to the console?
-    -  My answer would vary, depending on the use case. I think if the Application layer can't do what it was asked to do, then yes, let's throw an exception, and allow the Conole to catch it and present the appropriate information, depending on the exception thrown.
+    -  My answer would vary, depending on the use case. I think if the Application layer can't do what it was asked to do, then yes, let's throw an exception, and allow the Console to catch it and present the appropriate information, depending on the exception thrown.
 
-### Order Of development
+### Order Of Development
 1. Started the README.md to commence jotting down these thoughts.
 2. Created the 'FXCalculator.Application' project, to represent the application (business logic) layer. This will sit behind the console app. It could equally sit behind an API server - intention here is to go with a ports-and-connector / hexagonal architecture pattern.
 3. Added the interface for interacting with the calculation service in the application layer - IFXCalculatorService.
 4. Created the 'FXCalculationResult' class and 'FXCalculationOutcomeEnum' to represent the result of a transaction.
-5. Defined the methods for IFXCalculatorService, all returning 'FXCalculationResult'.
-6. Created a service class to inherit IFXCalculatorService, and implemented the methods with default responses that throw 'NotImplementedException' (temporary).
+5. Defined the method for IFXCalculatorService, returning 'FXCalculationResult'.
+6. Created a service class to inherit IFXCalculatorService, and implemented the method with default response that throws 'NotImplementedException' (temporary).
 7. Created the test project 'FXCalculator.Application.Tests'.
 8. Created 'FXCalculatorServiceTests' to test FXCalculatorService.
 9. Began populating tests.
@@ -150,7 +150,7 @@ The projects are:
 ### FXCalculator.Application
 The FXCalculator.Application project exists as the core domain of the 'FXCalculator' business logic, and houses the main service, models, interface, and custom exceptions, needed to process input from the console project class.
 
-Ordinarily, if this solution were running in a server environment (for example), the FXCalculator.Application project would be referenced by an API (or other presentation) layer in a 'ports and connector' type pattern. In fact, using this pattern, an API layer could indeed be placed alongside the consolse project and utilise the exact same entry point into the application, and consume the exact same return objects. This is indeed the point of the 'ports and connector' (sometimes referred to as a hexagonal pattern) - keeping business logic segregated from the presentation layer.
+Ordinarily, if this solution were running in a server environment (for example), the FXCalculator.Application project would be referenced by an API (or other presentation) layer in a 'ports and connector' type pattern. In fact, using this pattern, an API layer could indeed be placed alongside the consolse project and utilise the exact same entry point into the application, and consume the exact same return objects. This is indeed the point of the 'ports and connector' (sometimes referred to as a hexagonal pattern) - keeping business logic segregated from the presentation layer in a manner that eliminates the need to duplicate business logic for different presentation layers.
 
 The main entry-point into the FXCalculator.Application functionality is through the FXCalculatorService. 
 
@@ -164,9 +164,9 @@ In order of operation:
 
 2. Load the appropriate currency exchanger via the 'ICurrencyExchangeFactory', based on the settlement method.
 
-3. Load the 'ExchangeInstrument' based off the settlement method - that is to say, load all the necessary data to calculation the rate and determine the decimal precision.
+3. Load the 'ExchangeInstrument' based off the settlement method - that is to say, load all the necessary data to calculate the rate and determine the decimal precision.
 
-4. Finally, exchange the amount, using the 'ExchangeIntrument'.
+4. Finally, exchange the amount, using the 'ExchangeInstrument'.
 
 #### CurrencyLoader
 The CurrencyLoader is the intermediary between the data layer and the application layer. As the data in the cross table only has half of the data provided (using the symmetrical approach hinted at in the instructions), the CurrencyLoader completes the opposite pairs, if the data is not present in the data layer.
@@ -182,7 +182,7 @@ As the name suggests, the FXCalculator.Common project is used as a location for 
 ### FXCalculator.Data
 FXCalculator.Data is the data layer. It houses the class that interact with the data store, the 'CurrencyRepository', as well as the actual data to represent the rates, decimal precision, and cross table, all of which I have chosen to represent as json objects, for simplicity. Also included are various helpers to load the data from the stored json files.
 
-Ordinarily in a real-world application, the data layer (CurrencyRepository, in this case) would have been represented by .Net Core's Entity Framework database context (or similar). Therefore when approaching unit tests, 'CurrencyRepository' would potentially have had to have been substituted with a mock implementation via an external mocking library. This would have meant that every interaction with the data layer would have required a mocked response, which would have blown out the size of test project.
+Ordinarily in a real-world application, the data layer (CurrencyRepository, in this case) would have been represented by either .Net Core's Entity Framework database context, or perhaps a class to handle a connection to a NoSQL database such as MongoDB. Therefore when approaching unit tests, 'CurrencyRepository' would potentially have had to have been substituted with a mock implementation via an external mocking library. This would have meant that every interaction with the data layer would have required a mocked response, which would have blown out the size of test project.
 
 Alternatively, it's conceivable that the data may have been consumed from an external API. Given there are likely performance questions involved in both a data store and an external API, it may have been desirable to cache the data from these sources for a small amount of time, to limit the amount of service calls necessary.
 
