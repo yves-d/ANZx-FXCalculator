@@ -87,14 +87,14 @@ For the FXCalculator.Console tests, type or copy/paste:
     - Once the data is cleaned, the presentation layer can pass what was entered down to the business layer. It can then validate currencies, amounts, etc. Further, the methods of our service are strongly typed, so providing invalid input (such as a string or characters instead of a decimal) is not possible by the time the data hits the business layer.
 
     b. Is there anything exceptional we need to consider, with regards to what the user has entered?
-    - Amounts: For zero amounts, should be fine - just return the calculated amount (zero).
+    - Amounts: For zero amounts, no harm done - just return the calculated amount (zero).
     - Currencies: we have instructions on how to handle the case of not being able to find a currency pair.
 
     c. What if a currency entered doesn't exist?
     - Potentially we could treat it in a similar manner to not being able to find a currency pair. We can say that currency was not found.
 
     d. Do we need to validate transactions with a negative amount?
-    - Does it matter? Its not like attempting to withdraw a negative amount from a bank account.
+    - Can't exchange negative amounts, so yes.
 
     e. Should we return an exception from the Application layer to the console?
     -  My answer would vary, depending on the use case. I think if the Application layer can't do what it was asked to do, then yes, let's throw an exception, and allow the Conole to catch it and present the appropriate information, depending on the exception thrown.
