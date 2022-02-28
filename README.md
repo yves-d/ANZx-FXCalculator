@@ -222,6 +222,8 @@ Again, as the name suggests, FXCalculator.Console.Tests tests the validation han
 
 7. Similarly, if the types of errors cases at the Application layer increased, I perhaps would consider replacing the exception throwing/catching approach, with a more comprehensive response object that contained error information for the presentation layer to act on.
 
+8. In 'crossing' currencies in the search for the settlement rate, I have used a while loop to search through the currency table. I have set a hard limit on the while loop to be 5 cycles, to avoid bad data from creating an infinite loop. Therefore I have assumed that at most, there could only be five 'hops' between cross currencies.
+
 ## Production - Things to consider
 I would consider several options for a production environment:
 
